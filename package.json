@@ -1,0 +1,40 @@
+{
+  "name": "structurally",
+  "version": "0.0.1",
+  "description": "Collection of useful, performant, and immutable JavaScript data structures",
+  "main": "index.js",
+  "directories": {
+    "lib": "lib"
+  },
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/philippschulte/structurally.git"
+  },
+  "keywords": [
+    "data",
+    "structures",
+    "stacks",
+    "queues",
+    "linked",
+    "lists",
+    "sets",
+    "dictionaries",
+    "hashes",
+    "trees"
+  ],
+  "author": "Philipp Schulte <philipp.schulte@ymail.com> (http://www.philippschulte.com)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/philippschulte/structurally/issues"
+  },
+  "homepage": "https://github.com/philippschulte/structurally#readme",
+  "devDependencies": {
+    "jest-cli": "21.2.1"
+  },
+  "jest": {
+    "testEnvironment": "node"
+  }
+}
