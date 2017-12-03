@@ -1,23 +1,13 @@
 'use strict';
 
-const Stack = require('../lib/stack');
+const { Stack } = require('../lib/index');
 
 describe('Stack', () => {
   let stack;
 
   beforeEach(() => {
-    stack = new Stack();
+    stack = Stack();
     stack.push(1);
-  });
-
-  describe('#constructor', () => {
-    test('should create a new instance', () => {
-      expect(stack).toBeInstanceOf(Stack);
-    });
-
-    test('should throw an error if any arguments were passed', () => {
-      expect(() => new Stack('foo', 'bar')).toThrow();
-    });
   });
   
   describe('#push', () => {
