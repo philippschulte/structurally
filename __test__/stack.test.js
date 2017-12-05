@@ -36,7 +36,7 @@ describe('Stack', () => {
   });
   
   describe('#peek', () => {
-    test('should return the element at the top of the stack', () => {
+    test('should return the element at the top of the stack without removing it', () => {
       expect(stack.size()).toBe(1);
       expect(stack.peek()).toBe(1);
       expect(stack.size()).toBe(1);
