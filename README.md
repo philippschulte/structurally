@@ -88,6 +88,16 @@ Then add it as a script tag to your page:
   - [.clear()](#clear)
   - [.toString()](#toString)
   - [.toArray()](#toArray)
+- [Queue()](#Queue)
+  - [.enqueue(element)](#enqueue)
+  - [.dequeue()](#dequeue)
+  - [.peek()](#peek)
+  - [.includes(element)](#includes)
+  - [.isEmpty()](#isEmpty)
+  - [.size()](#size)
+  - [.clear()](#clear)
+  - [.toString()](#toString)
+  - [.toArray()](#toArray)
 
 <a name="Stack"></a>
 
@@ -104,7 +114,7 @@ let stack = Stack();
 ```
 
 **Kind**: constructor  
-**Return**: {object} New Stack class instance
+**Return**: {object} New Stack class instance.
 
 <a name="push"></a>
 
@@ -125,7 +135,7 @@ console.log(stack.toString()); // => one,two,three,four
 ```
 
 **Kind**: method  
-**Param**: element {primitive || object} The element or elements to be inserted.
+**Param**: element {primitive || object} The element to be inserted.
 
 <a name="pop"></a>
 
@@ -304,6 +314,222 @@ console.log(stack.toArray()); // => [ 'Taylor', 'Leon', 'Mark' ]
 
 **Kind**: method  
 **Return**: {array} A new array with all elements of the stack.
+
+<a name="Queue"></a>
+
+### [Queue()](https://github.com/philippschulte/structurally/blob/master/lib/queue.js#L14)
+
+*Create a queue which is an ordered collection of items that follows the FIFO (First In First Out), also known as the first-come first-served principle.*
+
+**Example**:
+
+```javascript
+const { Queue } = require('structurally');
+
+let queue = Queue();
+```
+
+**Kind**: constructor  
+**Return**: {object} New Queue class instance
+
+<a name="enqueue"></a>
+
+### [.enqueue(element)](https://github.com/philippschulte/structurally/blob/master/lib/queue.js#L25)
+
+*Inserts an element at the back of the queue.*
+
+**Example**:
+
+```javascript
+queue.clear();
+queue.enqueue('one');
+queue.enqueue('two');
+queue.enqueue('three');
+queue.enqueue('four');
+
+console.log(queue.toString()); // => one,two,three,four
+```
+
+**Kind**: method  
+**Param**: element {primitive || object} The element to be inserted.
+
+<a name="dequeue"></a>
+
+### [.dequeue()](https://github.com/philippschulte/structurally/blob/master/lib/queue.js#L36)
+
+*Removes and returns the first element from the queue.*
+
+**Example**:
+
+```javascript
+queue.clear();
+queue.enqueue(1);
+queue.enqueue(2);
+queue.enqueue(3);
+
+console.log(queue.size()); // => 3
+console.log(queue.dequeue()); // => 1
+console.log(queue.size()); // => 2
+```
+
+**Kind**: method  
+**Return**: {primitive || object} The removed element.
+
+<a name="peek"></a>
+
+### [.peek()](https://github.com/philippschulte/structurally/blob/master/lib/queue.js#L47)
+
+*Returns the first element from the queue without removing it.*
+
+**Example**:
+
+```javascript
+queue.clear();
+queue.enqueue('John');
+queue.enqueue('Amanda');
+queue.enqueue('Scott');
+queue.enqueue('Denise');
+
+console.log(queue.size()); // => 4
+console.log(queue.peek()); // => John
+console.log(queue.size()); // => 4
+```
+
+**Kind**: method  
+**Return**: {primitive || object} The first element from the queue.
+
+<a name="includes"></a>
+
+### [.includes(element)](https://github.com/philippschulte/structurally/blob/master/lib/queue.js#L59)
+
+*Determines whether an element is in the queue.*
+
+**Example**:
+
+```javascript
+queue.clear();
+queue.enqueue(1);
+queue.enqueue(2);
+queue.enqueue(3);
+
+console.log(queue.includes(1)); // => true
+console.log(queue.includes(4)); // => false
+```
+
+**Kind**: method  
+**Param**: element {primitive || object} The element in question.  
+**Return**: {boolean} True or false depending whether the element is in the queue.
+
+<a name="isEmpty"></a>
+
+### [.isEmpty()](https://github.com/philippschulte/structurally/blob/master/lib/queue.js#L70)
+
+*Tests if the queue is empty.*
+
+**Example**:
+
+```javascript
+queue.clear();
+queue.enqueue('Taylor');
+queue.enqueue('Leon');
+queue.enqueue('Mark');
+
+console.log(queue.isEmpty()); // => false
+queue.clear();
+console.log(queue.isEmpty()); // => true
+```
+
+**Kind**: method  
+**Return**: {boolean} True or false depending whether the queue is empty.
+
+<a name="size"></a>
+
+### [.size()](https://github.com/philippschulte/structurally/blob/master/lib/queue.js#L81)
+
+*Returns the number of elements in the queue.*
+
+**Example**:
+
+```javascript
+queue.clear();
+queue.enqueue(1);
+queue.enqueue(2);
+queue.enqueue(3);
+queue.enqueue(4);
+queue.enqueue(5);
+
+console.log(queue.size()); // => 5
+queue.clear();
+console.log(queue.size()); // => 0
+```
+
+**Kind**: method  
+**Return**: {number} The number of elements in the queue.
+
+<a name="clear"></a>
+
+### [.clear()](https://github.com/philippschulte/structurally/blob/master/lib/queue.js#L89)
+
+*Removes all elements from the queue.*
+
+**Example**:
+
+```javascript
+queue.clear();
+queue.enqueue('Taylor');
+queue.enqueue('Leon');
+queue.enqueue('Mark');
+
+console.log(queue.size()); // => 3
+console.log(queue.isEmpty()); // => false
+queue.clear();
+console.log(queue.size()); // => 0
+console.log(queue.isEmpty()); // => true
+```
+
+**Kind**: method
+
+<a name="toString"></a>
+
+### [.toString()](https://github.com/philippschulte/structurally/blob/master/lib/queue.js#L100)
+
+*Returns a string representing the elements of the queue.*
+
+**Example**:
+
+```javascript
+queue.clear();
+queue.enqueue(1);
+queue.enqueue(2);
+queue.enqueue(3);
+queue.enqueue(4);
+queue.enqueue(5);
+
+console.log(queue.toString()); // => 1,2,3,4,5
+```
+
+**Kind**: method  
+**Return**: {string} All elements of the queue.
+
+<a name="toArray"></a>
+
+### [.toArray()](https://github.com/philippschulte/structurally/blob/master/lib/queue.js#L111)
+
+*Copies the queue to a new array and returns it.*
+
+**Example**:
+
+```javascript
+queue.clear();
+queue.enqueue('Taylor');
+queue.enqueue('Leon');
+queue.enqueue('Mark');
+
+console.log(queue.toArray()); // => [ 'Taylor', 'Leon', 'Mark' ]
+```
+
+**Kind**: method  
+**Return**: {array} A new array with all elements of the queue.
 
 ## Tests
 
