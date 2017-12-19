@@ -12,7 +12,6 @@
 
 ## Table of Contents
 
-- [Motivation](#motivation)
 - [Features](#features)
 - [Getting started](#getting-started)
 - [API](#api)
@@ -20,17 +19,17 @@
 - [Contribute](#contribute)
 - [License](#license)
 
-## Motivation
-
-I needed a library for JavaScript data structures I can use from a browser and Node.js.
-
 ## Features
+
+### Sequential Data Structures
 
 - [Stacks](#Stack)
 - [Queues](#Queue)
 - [Linked Lists](#LinkedList)
 - [Sets](#Set)
 - [Dictionaries](#Dictionarie)
+
+### Non-Sequential Data Structures
 - [Hashes](#Hash)
 - [Trees](#Tree)
 - [Graphs](#Graph)
@@ -81,27 +80,27 @@ Then add it as a script tag to your page:
 - [Stack()](#Stack)
   - [.push(element)](#push)
   - [.pop()](#pop)
-  - [.peek()](#peek)
-  - [.includes(element)](#includes)
-  - [.isEmpty()](#isEmpty)
-  - [.size()](#size)
-  - [.clear()](#clear)
-  - [.toString()](#toString)
-  - [.toArray()](#toArray)
+  - [.peek()](#stackPeek)
+  - [.includes(element)](#stackIncludes)
+  - [.isEmpty()](#stackIsEmpty)
+  - [.size()](#stackSize)
+  - [.clear()](#stackClear)
+  - [.toString()](#stackToString)
+  - [.toArray()](#stackToArray)
 - [Queue()](#Queue)
   - [.enqueue(element)](#enqueue)
   - [.dequeue()](#dequeue)
-  - [.peek()](#peek)
-  - [.includes(element)](#includes)
-  - [.isEmpty()](#isEmpty)
-  - [.size()](#size)
-  - [.clear()](#clear)
-  - [.toString()](#toString)
-  - [.toArray()](#toArray)
+  - [.peek()](#queuePeek)
+  - [.includes(element)](#queueIncludes)
+  - [.isEmpty()](#queueIsEmpty)
+  - [.size()](#queueSize)
+  - [.clear()](#queueClear)
+  - [.toString()](#queueToString)
+  - [.toArray()](#queueToArray)
 
 <a name="Stack"></a>
 
-### [Stack()](https://github.com/philippschulte/structurally/blob/master/lib/stack.js#L14)
+### [Stack()](https://github.com/philippschulte/structurally/blob/master/lib/stack.js#L12)
 
 *Create a stack which is an ordered collection of items that follows the LIFO (Last In First Out) principle.*
 
@@ -118,13 +117,14 @@ let stack = Stack();
 
 <a name="push"></a>
 
-### [.push(element)](https://github.com/philippschulte/structurally/blob/master/lib/stack.js#L25)
+### [.push(element)](https://github.com/philippschulte/structurally/blob/master/lib/stack.js#L22)
 
-*Inserts an element at the top of the stack.*
+*Inserts one or multiple elements at the top of the stack.*
 
 **Example**:
 
 ```javascript
+// Add an element at the top of the stack one at the time
 stack.clear();
 stack.push('one');
 stack.push('two');
@@ -132,6 +132,11 @@ stack.push('three');
 stack.push('four');
 
 console.log(stack.toString()); // => one,two,three,four
+
+// Add multiple elements at the top of the stack at once
+stack.push('five', 'six', 'seven', 'eight');
+
+console.log(stack.toString()); // => one,two,three,four,five,six,seven,eight
 ```
 
 **Kind**: method  
@@ -139,7 +144,7 @@ console.log(stack.toString()); // => one,two,three,four
 
 <a name="pop"></a>
 
-### [.pop()](https://github.com/philippschulte/structurally/blob/master/lib/stack.js#L36)
+### [.pop()](https://github.com/philippschulte/structurally/blob/master/lib/stack.js#L33)
 
 *Removes and returns the element at the top of the stack.*
 
@@ -147,9 +152,7 @@ console.log(stack.toString()); // => one,two,three,four
 
 ```javascript
 stack.clear();
-stack.push(1);
-stack.push(2);
-stack.push(3);
+stack.push(1, 2, 3);
 
 console.log(stack.size()); // => 3
 console.log(stack.pop()); // => 3
@@ -159,9 +162,9 @@ console.log(stack.size()); // => 2
 **Kind**: method  
 **Return**: {primitive || object} The removed element.
 
-<a name="peek"></a>
+<a name="stackPeek"></a>
 
-### [.peek()](https://github.com/philippschulte/structurally/blob/master/lib/stack.js#L47)
+### [.peek()](https://github.com/philippschulte/structurally/blob/master/lib/stack.js#L44)
 
 *Returns the element at the top of the stack without removing it.*
 
@@ -169,10 +172,7 @@ console.log(stack.size()); // => 2
 
 ```javascript
 stack.clear();
-stack.push('John');
-stack.push('Amanda');
-stack.push('Scott');
-stack.push('Denise');
+stack.push('John', 'Amanda', 'Scott', 'Denise');
 
 console.log(stack.size()); // => 4
 console.log(stack.peek()); // => Denise
@@ -182,9 +182,9 @@ console.log(stack.size()); // => 4
 **Kind**: method  
 **Return**: {primitive || object} The element at the top of the stack.
 
-<a name="includes"></a>
+<a name="stackIncludes"></a>
 
-### [.includes(element)](https://github.com/philippschulte/structurally/blob/master/lib/stack.js#L59)
+### [.includes(element)](https://github.com/philippschulte/structurally/blob/master/lib/stack.js#L56)
 
 *Determines whether an element is in the stack.*
 
@@ -192,9 +192,7 @@ console.log(stack.size()); // => 4
 
 ```javascript
 stack.clear();
-stack.push(1);
-stack.push(2);
-stack.push(3);
+stack.push(1, 2, 3);
 
 console.log(stack.includes(1)); // => true
 console.log(stack.includes(4)); // => false
@@ -204,9 +202,9 @@ console.log(stack.includes(4)); // => false
 **Param**: element {primitive || object} The element in question.  
 **Return**: {boolean} True or false depending whether the element is in the stack.
 
-<a name="isEmpty"></a>
+<a name="stackIsEmpty"></a>
 
-### [.isEmpty()](https://github.com/philippschulte/structurally/blob/master/lib/stack.js#L70)
+### [.isEmpty()](https://github.com/philippschulte/structurally/blob/master/lib/stack.js#L67)
 
 *Tests if the stack is empty.*
 
@@ -214,9 +212,7 @@ console.log(stack.includes(4)); // => false
 
 ```javascript
 stack.clear();
-stack.push('Taylor');
-stack.push('Leon');
-stack.push('Mark');
+stack.push('Taylor', 'Leon', 'Mark');
 
 console.log(stack.isEmpty()); // => false
 stack.clear();
@@ -226,9 +222,9 @@ console.log(stack.isEmpty()); // => true
 **Kind**: method  
 **Return**: {boolean} True or false depending whether the stack is empty.
 
-<a name="size"></a>
+<a name="stackSize"></a>
 
-### [.size()](https://github.com/philippschulte/structurally/blob/master/lib/stack.js#L81)
+### [.size()](https://github.com/philippschulte/structurally/blob/master/lib/stack.js#L78)
 
 *Returns the number of elements in the stack.*
 
@@ -236,11 +232,7 @@ console.log(stack.isEmpty()); // => true
 
 ```javascript
 stack.clear();
-stack.push(1);
-stack.push(2);
-stack.push(3);
-stack.push(4);
-stack.push(5);
+stack.push(1, 2, 3, 4, 5);
 
 console.log(stack.size()); // => 5
 stack.clear();
@@ -250,9 +242,9 @@ console.log(stack.size()); // => 0
 **Kind**: method  
 **Return**: {number} The number of elements in the stack.
 
-<a name="clear"></a>
+<a name="stackClear"></a>
 
-### [.clear()](https://github.com/philippschulte/structurally/blob/master/lib/stack.js#L89)
+### [.clear()](https://github.com/philippschulte/structurally/blob/master/lib/stack.js#L86)
 
 *Removes all elements from the stack.*
 
@@ -260,9 +252,7 @@ console.log(stack.size()); // => 0
 
 ```javascript
 stack.clear();
-stack.push('Taylor');
-stack.push('Leon');
-stack.push('Mark');
+stack.push('Taylor', 'Leon', 'Mark');
 
 console.log(stack.size()); // => 3
 console.log(stack.isEmpty()); // => false
@@ -273,9 +263,9 @@ console.log(stack.isEmpty()); // => true
 
 **Kind**: method
 
-<a name="toString"></a>
+<a name="stackToString"></a>
 
-### [.toString()](https://github.com/philippschulte/structurally/blob/master/lib/stack.js#L100)
+### [.toString()](https://github.com/philippschulte/structurally/blob/master/lib/stack.js#L97)
 
 *Returns a string representing the elements of the stack.*
 
@@ -283,11 +273,7 @@ console.log(stack.isEmpty()); // => true
 
 ```javascript
 stack.clear();
-stack.push(1);
-stack.push(2);
-stack.push(3);
-stack.push(4);
-stack.push(5);
+stack.push(1, 2, 3, 4, 5);
 
 console.log(stack.toString()); // => 1,2,3,4,5
 ```
@@ -295,9 +281,9 @@ console.log(stack.toString()); // => 1,2,3,4,5
 **Kind**: method  
 **Return**: {string} All elements of the stack.
 
-<a name="toArray"></a>
+<a name="stackToArray"></a>
 
-### [.toArray()](https://github.com/philippschulte/structurally/blob/master/lib/stack.js#L111)
+### [.toArray()](https://github.com/philippschulte/structurally/blob/master/lib/stack.js#L108)
 
 *Copies the stack to a new array and returns it.*
 
@@ -305,9 +291,7 @@ console.log(stack.toString()); // => 1,2,3,4,5
 
 ```javascript
 stack.clear();
-stack.push('Taylor');
-stack.push('Leon');
-stack.push('Mark');
+stack.push('Taylor', 'Leon', 'Mark');
 
 console.log(stack.toArray()); // => [ 'Taylor', 'Leon', 'Mark' ]
 ```
@@ -315,9 +299,11 @@ console.log(stack.toArray()); // => [ 'Taylor', 'Leon', 'Mark' ]
 **Kind**: method  
 **Return**: {array} A new array with all elements of the stack.
 
+---
+
 <a name="Queue"></a>
 
-### [Queue()](https://github.com/philippschulte/structurally/blob/master/lib/queue.js#L14)
+### [Queue()](https://github.com/philippschulte/structurally/blob/master/lib/queue.js#L12)
 
 *Create a queue which is an ordered collection of items that follows the FIFO (First In First Out), also known as the first-come first-served principle.*
 
@@ -334,13 +320,14 @@ let queue = Queue();
 
 <a name="enqueue"></a>
 
-### [.enqueue(element)](https://github.com/philippschulte/structurally/blob/master/lib/queue.js#L25)
+### [.enqueue(element)](https://github.com/philippschulte/structurally/blob/master/lib/queue.js#L22)
 
-*Inserts an element at the back of the queue.*
+*Inserts one or multiple elements at the back of the queue.*
 
 **Example**:
 
 ```javascript
+// Add an element at the back of the queue one at the time
 queue.clear();
 queue.enqueue('one');
 queue.enqueue('two');
@@ -348,6 +335,11 @@ queue.enqueue('three');
 queue.enqueue('four');
 
 console.log(queue.toString()); // => one,two,three,four
+
+// Add multiple elements at the back of the queue at once
+queue.enqueue('five', 'six', 'seven', 'eight');
+
+console.log(queue.toString()); // => one,two,three,four,five,six,seven,eight
 ```
 
 **Kind**: method  
@@ -355,7 +347,7 @@ console.log(queue.toString()); // => one,two,three,four
 
 <a name="dequeue"></a>
 
-### [.dequeue()](https://github.com/philippschulte/structurally/blob/master/lib/queue.js#L36)
+### [.dequeue()](https://github.com/philippschulte/structurally/blob/master/lib/queue.js#L33)
 
 *Removes and returns the first element from the queue.*
 
@@ -363,9 +355,7 @@ console.log(queue.toString()); // => one,two,three,four
 
 ```javascript
 queue.clear();
-queue.enqueue(1);
-queue.enqueue(2);
-queue.enqueue(3);
+queue.enqueue(1, 2, 3);
 
 console.log(queue.size()); // => 3
 console.log(queue.dequeue()); // => 1
@@ -375,9 +365,9 @@ console.log(queue.size()); // => 2
 **Kind**: method  
 **Return**: {primitive || object} The removed element.
 
-<a name="peek"></a>
+<a name="queuePeek"></a>
 
-### [.peek()](https://github.com/philippschulte/structurally/blob/master/lib/queue.js#L47)
+### [.peek()](https://github.com/philippschulte/structurally/blob/master/lib/queue.js#L44)
 
 *Returns the first element from the queue without removing it.*
 
@@ -385,10 +375,7 @@ console.log(queue.size()); // => 2
 
 ```javascript
 queue.clear();
-queue.enqueue('John');
-queue.enqueue('Amanda');
-queue.enqueue('Scott');
-queue.enqueue('Denise');
+queue.enqueue('John', 'Amanda', 'Scott', 'Denise');
 
 console.log(queue.size()); // => 4
 console.log(queue.peek()); // => John
@@ -398,9 +385,9 @@ console.log(queue.size()); // => 4
 **Kind**: method  
 **Return**: {primitive || object} The first element from the queue.
 
-<a name="includes"></a>
+<a name="queueIncludes"></a>
 
-### [.includes(element)](https://github.com/philippschulte/structurally/blob/master/lib/queue.js#L59)
+### [.includes(element)](https://github.com/philippschulte/structurally/blob/master/lib/queue.js#L56)
 
 *Determines whether an element is in the queue.*
 
@@ -408,9 +395,7 @@ console.log(queue.size()); // => 4
 
 ```javascript
 queue.clear();
-queue.enqueue(1);
-queue.enqueue(2);
-queue.enqueue(3);
+queue.enqueue(1, 2, 3);
 
 console.log(queue.includes(1)); // => true
 console.log(queue.includes(4)); // => false
@@ -420,9 +405,9 @@ console.log(queue.includes(4)); // => false
 **Param**: element {primitive || object} The element in question.  
 **Return**: {boolean} True or false depending whether the element is in the queue.
 
-<a name="isEmpty"></a>
+<a name="queueIsEmpty"></a>
 
-### [.isEmpty()](https://github.com/philippschulte/structurally/blob/master/lib/queue.js#L70)
+### [.isEmpty()](https://github.com/philippschulte/structurally/blob/master/lib/queue.js#L67)
 
 *Tests if the queue is empty.*
 
@@ -430,9 +415,7 @@ console.log(queue.includes(4)); // => false
 
 ```javascript
 queue.clear();
-queue.enqueue('Taylor');
-queue.enqueue('Leon');
-queue.enqueue('Mark');
+queue.enqueue('Taylor', 'Leon', 'Mark');
 
 console.log(queue.isEmpty()); // => false
 queue.clear();
@@ -442,9 +425,9 @@ console.log(queue.isEmpty()); // => true
 **Kind**: method  
 **Return**: {boolean} True or false depending whether the queue is empty.
 
-<a name="size"></a>
+<a name="queueSize"></a>
 
-### [.size()](https://github.com/philippschulte/structurally/blob/master/lib/queue.js#L81)
+### [.size()](https://github.com/philippschulte/structurally/blob/master/lib/queue.js#L78)
 
 *Returns the number of elements in the queue.*
 
@@ -452,11 +435,7 @@ console.log(queue.isEmpty()); // => true
 
 ```javascript
 queue.clear();
-queue.enqueue(1);
-queue.enqueue(2);
-queue.enqueue(3);
-queue.enqueue(4);
-queue.enqueue(5);
+queue.enqueue(1, 2, 3, 4, 5);
 
 console.log(queue.size()); // => 5
 queue.clear();
@@ -466,9 +445,9 @@ console.log(queue.size()); // => 0
 **Kind**: method  
 **Return**: {number} The number of elements in the queue.
 
-<a name="clear"></a>
+<a name="queueClear"></a>
 
-### [.clear()](https://github.com/philippschulte/structurally/blob/master/lib/queue.js#L89)
+### [.clear()](https://github.com/philippschulte/structurally/blob/master/lib/queue.js#L86)
 
 *Removes all elements from the queue.*
 
@@ -476,9 +455,7 @@ console.log(queue.size()); // => 0
 
 ```javascript
 queue.clear();
-queue.enqueue('Taylor');
-queue.enqueue('Leon');
-queue.enqueue('Mark');
+queue.enqueue('Taylor', 'Leon', 'Mark');
 
 console.log(queue.size()); // => 3
 console.log(queue.isEmpty()); // => false
@@ -489,9 +466,9 @@ console.log(queue.isEmpty()); // => true
 
 **Kind**: method
 
-<a name="toString"></a>
+<a name="queueToString"></a>
 
-### [.toString()](https://github.com/philippschulte/structurally/blob/master/lib/queue.js#L100)
+### [.toString()](https://github.com/philippschulte/structurally/blob/master/lib/queue.js#L97)
 
 *Returns a string representing the elements of the queue.*
 
@@ -499,11 +476,7 @@ console.log(queue.isEmpty()); // => true
 
 ```javascript
 queue.clear();
-queue.enqueue(1);
-queue.enqueue(2);
-queue.enqueue(3);
-queue.enqueue(4);
-queue.enqueue(5);
+queue.enqueue(1, 2, 3, 4, 5);
 
 console.log(queue.toString()); // => 1,2,3,4,5
 ```
@@ -511,9 +484,9 @@ console.log(queue.toString()); // => 1,2,3,4,5
 **Kind**: method  
 **Return**: {string} All elements of the queue.
 
-<a name="toArray"></a>
+<a name="queueToArray"></a>
 
-### [.toArray()](https://github.com/philippschulte/structurally/blob/master/lib/queue.js#L111)
+### [.toArray()](https://github.com/philippschulte/structurally/blob/master/lib/queue.js#L108)
 
 *Copies the queue to a new array and returns it.*
 
@@ -521,9 +494,7 @@ console.log(queue.toString()); // => 1,2,3,4,5
 
 ```javascript
 queue.clear();
-queue.enqueue('Taylor');
-queue.enqueue('Leon');
-queue.enqueue('Mark');
+queue.enqueue('Taylor', 'Leon', 'Mark');
 
 console.log(queue.toArray()); // => [ 'Taylor', 'Leon', 'Mark' ]
 ```
@@ -550,4 +521,4 @@ $ npm run commit
 
 ## License
 
-Licensed under the [MIT License](LICENSE) © 2017 Philipp Schulte
+Licensed under the [MIT License](LICENSE) © 2018 Philipp Schulte

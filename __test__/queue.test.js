@@ -7,15 +7,26 @@ describe('Queue', () => {
 
   beforeEach(() => {
     queue = Queue();
-    queue.enqueue(1);
+    queue.enqueue(1, 2, 3);
+  });
+
+  afterEach(() => {
+    queue.clear();
   });
   
   describe('#enqueue', () => {
-    test('should insert a new element at the back of the queue', () => {    
-      queue.enqueue(2);
-      expect(queue.size()).toBe(2);
+    test('should insert one element at the back of the queue', () => {    
+      queue.enqueue(4);
+      expect(queue.size()).toBe(4);
       expect(queue.peek()).toBe(1);
-      expect(queue.includes(2)).toBeTruthy();
+      expect(queue.includes(4)).toBeTruthy();
+    });
+
+    test('should insert multiple elements at the back of the queue', () => {
+      queue.enqueue(4, 5, 6);
+      expect(queue.size()).toBe(6);
+      expect(queue.peek()).toBe(1);
+      expect(queue.includes(6)).toBeTruthy();
     });
     
     test('should throw an error if no argument was passed', () => {
@@ -26,8 +37,8 @@ describe('Queue', () => {
   describe('#dequeue', () => {
     test('should remove and return the first element from the queue', () => {
       expect(queue.dequeue()).toBe(1);
-      expect(queue.size()).toBe(0);
-      expect(queue.isEmpty()).toBeTruthy();
+      expect(queue.size()).toBe(2);
+      expect(queue.isEmpty()).toBeFalsy();
     });
 
     test('should throw an error if any arguments were passed', () => {
@@ -37,9 +48,9 @@ describe('Queue', () => {
   
   describe('#peek', () => {
     test('should return the first element from the queue without removing it', () => {
-      expect(queue.size()).toBe(1);
+      expect(queue.size()).toBe(3);
       expect(queue.peek()).toBe(1);
-      expect(queue.size()).toBe(1);
+      expect(queue.size()).toBe(3);
     });
 
     test('should throw an error if any arguments were passed', () => {
@@ -49,17 +60,17 @@ describe('Queue', () => {
   
   describe('#includes', () => {
     test('should be truthy if element does exist in queue', () => {
-      expect(queue.size()).toBe(1);
+      expect(queue.size()).toBe(3);
       expect(queue.peek()).toBe(1);
       expect(queue.isEmpty()).toBeFalsy();
       expect(queue.includes(1)).toBeTruthy();
     });
     
     test('should be falsy if element does not exist in queue', () => {
-      expect(queue.size()).toBe(1);
+      expect(queue.size()).toBe(3);
       expect(queue.peek()).toBe(1);
       expect(queue.isEmpty()).toBeFalsy();
-      expect(queue.includes(2)).toBeFalsy();
+      expect(queue.includes(4)).toBeFalsy();
       expect(queue.includes(true)).toBeFalsy();
       expect(queue.includes(null)).toBeFalsy();
       expect(queue.includes('foo')).toBeFalsy();
@@ -72,14 +83,12 @@ describe('Queue', () => {
   
   describe('#isEmpty', () => {
     test('should be truthy if queue is empty', () => {
-      expect(queue.size()).toBe(1);
-      expect(queue.dequeue()).toBe(1);
-      expect(queue.size()).toBe(0);
+      queue.clear();
       expect(queue.isEmpty()).toBeTruthy();
     });
     
     test('should be falsy if queue is not empty', () => {
-      expect(queue.size()).toBe(1);
+      expect(queue.size()).toBe(3);
       expect(queue.isEmpty()).toBeFalsy();
     });
 
@@ -90,7 +99,7 @@ describe('Queue', () => {
   
   describe('#size', () => {
     test('should return the number of elements in the queue', () => {
-      expect(queue.size()).toBe(1);
+      expect(queue.size()).toBe(3);
       expect(queue.peek()).toBe(1);
       expect(queue.isEmpty()).toBeFalsy();
     });
@@ -115,7 +124,7 @@ describe('Queue', () => {
   
   describe('#toString', () => {
     test('should return a string representing the elements of the queue', () => {
-      expect(queue.toString()).toMatch(/1/);
+      expect(queue.toString()).toMatch(/1,2,3/);
       expect(typeof queue.toString()).toBe('string');     
     });
 
@@ -127,7 +136,9 @@ describe('Queue', () => {
   describe('#toArray', () => {
     test('should copy the queue to a new array and returns it', () => {
       expect(queue.toArray()[0]).toBe(1);
-      expect(queue.toArray().length).toBe(1);
+      expect(queue.toArray()[1]).toBe(2);
+      expect(queue.toArray()[2]).toBe(3);
+      expect(queue.toArray().length).toBe(3);
       expect(Array.isArray(queue.toArray())).toBeTruthy();
     });
 
